@@ -1,0 +1,121 @@
+// app/globals.css
+@layer components {
+  .btn-cta {
+    @apply inline-flex items-center justify-center rounded-lg bg-blue-600 px-6 py-2 font-semibold text-white shadow-sm transition-all hover:bg-blue-700 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 disabled:opacity-50;
+  }
+  .btn-cta-outline {
+    @apply inline-flex items-center justify-center rounded-lg border-2 border-blue-600 px-6 py-2 font-semibold text-blue-600 shadow-sm transition-all hover:bg-blue-50 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400;
+  }
+  .btn-cta-secondary {
+    @apply inline-flex items-center justify-center rounded-lg bg-white px-6 py-2 font-semibold text-blue-600 shadow-sm transition-all hover:bg-blue-50 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400;
+  }
+}
+
+// components/header.tsx
+const Header = () => {
+  return (
+    <div>
+      {/* Desktop button */}
+      <button className="btn-cta">予約する</button>
+      {/* Other code here */}
+    </div>
+  );
+};
+
+// components/hero-section.tsx
+const HeroSection = () => {
+  return (
+    <div>
+      {/* Primary CTA button */}
+      <button className="btn-cta">今すぐ予約</button>
+      {/* Secondary CTA button */}
+      <button className="rounded-lg border-2 border-white px-8 py-3 text-lg text-white shadow-sm transition-colors hover:bg-white hover:text-gray-900 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70">
+        客室・料金を見る
+      </button>
+      {/* Other code here */}
+    </div>
+  );
+};
+
+// components/reservation-section.tsx
+const ReservationSection = () => {
+  const methods = [
+    { name: "Method 1", button: "btn-cta" },
+    { name: "Method 2", button: "btn-cta" },
+    // Other methods here
+  ];
+
+  return (
+    <div>
+      {/* Methods list */}
+      {methods.map((method) => (
+        <a href="#" className="btn-cta">
+          {method.name}
+        </a>
+      ))}
+      {/* Online reservation sites */}
+      <a href="#" className="block rounded-lg border border-gray-300 px-4 py-3 text-center shadow-sm transition-colors hover:border-gray-400 hover:text-gray-900 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
+        オンライン予約サイト 1
+      </a>
+      <a href="#" className="block rounded-lg border border-gray-300 px-4 py-3 text-center shadow-sm transition-colors hover:border-gray-400 hover:text-gray-900 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
+        オンライン予約サイト 2
+      </a>
+      {/* Other code here */}
+    </div>
+  );
+};
+
+// components/contact-section.tsx
+const ContactSection = () => {
+  return (
+    <div>
+      {/* Primary booking button */}
+      <button className="btn-cta w-full">予約する</button>
+      {/* Grid booking links */}
+      <a href="#" className="block rounded-lg border border-gray-300 px-4 py-2 text-center text-sm shadow-sm transition-colors hover:border-gray-400 hover:text-gray-900 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
+        Booking Link 1
+      </a>
+      <a href="#" className="block rounded-lg border border-gray-300 px-4 py-2 text-center text-sm shadow-sm transition-colors hover:border-gray-400 hover:text-gray-900 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
+        Booking Link 2
+      </a>
+      {/* Other code here */}
+    </div>
+  );
+};
+
+// components/footer.tsx
+const Footer = () => {
+  return (
+    <div>
+      {/* Official site reservation button */}
+      <button className="btn-cta w-full text-sm">公式サイト予約</button>
+      {/* External site links */}
+      <a href="#" className="block rounded-lg border border-gray-600 px-4 py-2 text-center text-sm shadow-sm transition-colors hover:border-gray-400 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
+        楽天トラベル
+      </a>
+      <a href="#" className="block rounded-lg border border-gray-600 px-4 py-2 text-center text-sm shadow-sm transition-colors hover:border-gray-400 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
+        じゃらん
+      </a>
+      {/* Other code here */}
+    </div>
+  );
+};
+
+// components/reservation-portal.tsx
+const ReservationPortal = ({ sites }) => {
+  return (
+    <div>
+      {/* External site buttons */}
+      {sites.map((site) => (
+        <button className={`${site.button} flex w-full items-center justify-center gap-2 rounded-lg px-6 py-3 font-semibold text-white shadow-sm transition-colors hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400`}>
+          {site.name}
+        </button>
+      ))}
+      {/* White button for phone call */}
+      <button className="inline-flex items-center gap-2 rounded-lg bg-white px-8 py-3 font-semibold text-blue-600 shadow-sm transition-colors hover:bg-blue-50 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
+        今すぐ電話する
+      </button>
+      {/* Other code here */}
+    </div>
+  );
+};

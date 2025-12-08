@@ -1,0 +1,166 @@
+// components/reservation-section.tsx
+import React from 'react';
+
+const ReservationSection = ({ methods }) => {
+  return (
+    <div>
+      {methods.map((m) => (
+        <a
+          key={m.id}
+          href={m.href}
+          target={m.href.startsWith('tel:') ? undefined : '_blank'}
+          rel={m.href.startsWith('tel:') ? undefined : 'noopener noreferrer'}
+          className="inline-block rounded bg-blue-600 px-6 py-2 text-white transition-colors hover:bg-blue-700"
+        >
+          {m.cta}
+        </a>
+      ))}
+      <a
+        className="block rounded border border-gray-300 px-4 py-3 text-center transition-colors hover:border-gray-400 hover:text-gray-900"
+        href="/reservation"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        楽天トラベル
+      </a>
+      <a
+        className="block rounded border border-gray-300 px-4 py-3 text-center transition-colors hover:border-gray-400 hover:text-gray-900"
+        href="/reservation"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        じゃらん
+      </a>
+      <a
+        className="block rounded border border-gray-300 px-4 py-3 text-center transition-colors hover:border-gray-400 hover:text-gray-900"
+        href="/reservation"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        るるぶトラベル
+      </a>
+    </div>
+  );
+};
+
+export default ReservationSection;
+
+// components/contact-section.tsx
+import React from 'react';
+
+const ContactSection = () => {
+  return (
+    <div>
+      <a
+        href="/reservation"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block rounded-lg bg-blue-600 px-6 py-3 text-center font-semibold text-white transition-colors hover:bg-blue-700"
+      >
+        公式サイト予約（最安値保証）
+      </a>
+      <div className="grid grid-cols-2 gap-4">
+        <a
+          href="/reservation"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block rounded-lg border border-gray-300 px-4 py-2 text-center text-sm transition-colors hover:border-gray-400 hover:text-gray-900"
+        >
+          楽天トラベル
+        </a>
+        <a
+          href="/reservation"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block rounded-lg border border-gray-300 px-4 py-2 text-center text-sm transition-colors hover:border-gray-400 hover:text-gray-900"
+        >
+          じゃらん
+        </a>
+      </div>
+    </div>
+  );
+};
+
+export default ContactSection;
+
+// components/footer.tsx
+import React from 'react';
+
+const Footer = () => {
+  return (
+    <footer>
+      <a
+        href="/reservation"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block rounded bg-blue-600 px-4 py-2 text-center text-sm transition-colors hover:bg-blue-700"
+      >
+        公式サイト予約
+      </a>
+      <a
+        href="/reservation"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block rounded border border-gray-600 px-4 py-2 text-center text-sm transition-colors hover:border-gray-400"
+      >
+        楽天トラベル
+      </a>
+      <a
+        href="/reservation"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block rounded border border-gray-600 px-4 py-2 text-center text-sm transition-colors hover:border-gray-400"
+      >
+        じゃらん
+      </a>
+    </footer>
+  );
+};
+
+export default Footer;
+
+// components/header.tsx
+import React from 'react';
+
+const Header = () => {
+  return (
+    <header>
+      <nav>
+        <ul>
+          <li>
+            <a
+              href="/reservation"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
+            >
+              予約する
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+  );
+};
+
+export default Header;
+
+// components/hero-section.tsx
+import React from 'react';
+
+const HeroSection = () => {
+  return (
+    <section>
+      <a
+        href="/reservation"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="rounded-lg bg-blue-600 px-8 py-3 text-lg text-white transition-colors hover:bg-blue-700"
+      >
+        今すぐ予約
+      </a>
+    </section>
+  );
+};
+
+export default HeroSection;
