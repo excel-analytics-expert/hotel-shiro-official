@@ -5,14 +5,14 @@ import Image from "next/image"
 
 const attractions = [
   {
-    name: "東京ディズニーリゾート",
+    name: "舞浜エリア",
     description: "家族で楽しめる大型テーマパーク等々",
     image: "/images/attractions/tdr-theme-park.jpg",
-    access: "当ホテルより約15㎞",
+    access: "当ホテルより約13.4㎞",
     provider: "提供元：浦安市",
   },
   {
-    name: "ららアリーナ",
+    name: "LaLa arena TOKYO-BAY",
     description: "船橋市の多目的アリーナ。コンサートやスポーツイベントを開催する最新施設",
     image: "/images/attractions/lala-arena.jpg",
     access: "当ホテルより約2㎞",
