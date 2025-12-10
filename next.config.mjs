@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // 画像のドメイン許可などが必要ならここに書きますが、今回は基本設定だけでOKです
+  // imagesの設定を削除したので、自動的に最適化(WebP変換など)がONになります
 };
 
 export default nextConfig;

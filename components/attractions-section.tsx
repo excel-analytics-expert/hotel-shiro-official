@@ -7,7 +7,8 @@ const attractions = [
   {
     name: "舞浜エリア",
     description: "家族で楽しめる大型テーマパーク等々",
-    image: "/images/attractions/tdr-theme-park.jpg",
+    // 【重要】PC内の「maihama-v25e1f (2).jpg」を「maihama.jpg」に名前変更してください
+    image: "/images/attractions/maihama.jpg",
     access: "当ホテルより約13.4㎞",
     provider: "提供元：浦安市",
   },
@@ -29,7 +30,7 @@ const attractions = [
     name: "幕張メッセ",
     description: "国際展示場・国際会議場・幕張イベントホールからなる大型コンベンション施設",
     image: "/images/attractions/makuhari-messe.jpg",
-    access: "当ホテルより約8㎞",
+    access: "当ホテルより約9㎞", // ←約9kmに修正しました
     provider: "提供元：株式会社幕張メッセ",
   },
   {
@@ -42,7 +43,8 @@ const attractions = [
   {
     name: "船橋競馬場",
     description: "地方競馬の名門競馬場。ナイター競馬やイベントも開催される歴史ある施設",
-    image: "/images/attractions/funabashi-racetrack.jpg",
+    // ←ご指定のファイル名に修正しました
+    image: "/images/attractions/funabashi-racetrack-copy-0.jpg",
     access: "当ホテルより約3㎞",
     provider: "提供元：千葉県競馬組合",
   },
