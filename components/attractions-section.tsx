@@ -76,7 +76,7 @@ export default function AttractionsSection() {
                   className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   priority={index < 3}
-                  quality={90}
+                  quality={75}
                 />
               </div>
 
