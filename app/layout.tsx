@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Inter, JetBrains_Mono } from "next/font/google"
+import { Analytics } from "@vercel/analytics/next"
 import HomeFab from "@/components/home-fab"
 import "./globals.css"
 
@@ -168,6 +169,7 @@ export default function RootLayout({
       <body>
         {children}
         <HomeFab />
+        <Analytics />
       </body>
     </html>
   )
