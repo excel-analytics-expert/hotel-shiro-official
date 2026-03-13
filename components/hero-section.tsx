@@ -9,15 +9,14 @@ const SLIDE_DURATION = 5000
 const STORAGE_KEY = "slides-v2"
 
 export default function HeroSection() {
-  const [slides, setSlides] = useState<Slide[]>(() => {
-    if (typeof window !== "undefined") {
-      try {
-        const saved = localStorage.getItem(STORAGE_KEY)
-        if (saved) return JSON.parse(saved) as Slide[]
-      } catch {}
-    }
-    return defaultSlides
-  })
+  const [slides, setSlides] = useState<Slide[]>(defaultSlides)
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY)
+      if (saved) setSlides(JSON.parse(saved) as Slide[])
+    } catch { }
+  }, [])
   const [current, setCurrent] = useState(0)
 
   useEffect(() => {

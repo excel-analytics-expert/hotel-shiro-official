@@ -8,8 +8,8 @@ import { useEffect, useState } from "react"
  * - Observes each section (except ones with data-assemble="off" and the hero #home)
  * - Marks items for staggered reveal
  * - Applies type-specific effects:
- *    - .fx-text: gentle fade/slide
- *    - .fx-card: dreamy soft blur + slight scale + glow
+ * - .fx-text: gentle fade/slide
+ * - .fx-card: dreamy soft blur + slight scale + glow
  * - Respects prefers-reduced-motion
  * - Graceful fallback for static sites
  */
@@ -22,82 +22,68 @@ export default function AssembleOnScroll() {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     if (reduce) return
 
-    const sections = Array.from(document.querySelectorAll<HTMLElement>("main section")).filter((s) => s.id !== "home") // exclude hero
+    const sections = Array.from(document.querySelectorAll<HTMLElement>("main section")).filter((s) => s.id !== "home")
 
     const observers: IntersectionObserver[] = []
 
     sections.forEach((section) => {
-      if (section.dataset.assemblePrepared === "true") return
+      // 1. DOM preparation (only once per DOM node)
+      if (section.dataset.assemblePrepared !== "true") {
+        section.classList.add("reveal-section")
+        section.dataset.assemblePrepared = "true"
 
-      section.classList.add("reveal-section")
-      section.dataset.assemblePrepared = "true"
-
-      // Exclude groups with data-assemble="off"
-      const groups = Array.from(section.querySelectorAll<HTMLElement>(":scope > *")).filter(
-        (g) => g.getAttribute("data-assemble") !== "off",
-      )
-
-      groups.forEach((group) => {
-        group.classList.add("assemble-group")
-
-        // Exclude items with data-assemble="off" or within a group with data-assemble="off"
-        const rawItems = Array.from(group.querySelectorAll<HTMLElement>(":scope > *"))
-        const items = rawItems.filter(
-          (el) => !el.closest('[data-assemble="off"]') && el.getAttribute("data-assemble") !== "instant",
+        const groups = Array.from(section.querySelectorAll<HTMLElement>(":scope > *")).filter(
+          (g) => g.getAttribute("data-assemble") !== "off",
         )
 
-        items.forEach((el, i) => {
-          el.classList.add("assemble-item")
-          el.style.setProperty("--i", String(i))
+        groups.forEach((group) => {
+          group.classList.add("assemble-group")
+          const rawItems = Array.from(group.querySelectorAll<HTMLElement>(":scope > *"))
+          const items = rawItems.filter(
+            (el) => !el.closest('[data-assemble="off"]') && el.getAttribute("data-assemble") !== "instant",
+          )
 
-          // Heuristic tagging for text vs card
-          const tag = el.tagName
-          const isTextTag =
-            tag === "H1" ||
-            tag === "H2" ||
-            tag === "H3" ||
-            tag === "H4" ||
-            tag === "H5" ||
-            tag === "H6" ||
-            tag === "P" ||
-            tag === "LI" ||
-            tag === "SMALL" ||
-            tag === "BLOCKQUOTE" ||
-            tag === "LABEL" ||
-            tag === "SPAN"
+          items.forEach((el, i) => {
+            el.classList.add("assemble-item")
+            el.style.setProperty("--i", String(i))
 
-          if (isTextTag) {
-            el.classList.add("fx-text")
-          }
-          // If the element itself or its container is marked as a card
-          if (
-            el.matches('[data-fx="card"], .fx-card') ||
-            (el.parentElement && el.parentElement.matches('[data-fx="card"], .fx-card'))
-          ) {
-            el.classList.add("fx-card")
+            const tag = el.tagName
+            const isTextTag = ["H1", "H2", "H3", "H4", "H5", "H6", "P", "LI", "SMALL", "BLOCKQUOTE", "LABEL", "SPAN"].includes(tag)
+
+            if (isTextTag) {
+              el.classList.add("fx-text")
+            }
+            if (
+              el.matches('[data-fx="card"], .fx-card') ||
+              (el.parentElement && el.parentElement.matches('[data-fx="card"], .fx-card'))
+            ) {
+              el.classList.add("fx-card")
+            }
+          })
+
+          if (items.length === 0 && group.getAttribute("data-assemble") !== "off") {
+            group.classList.add("assemble-item")
+            group.style.setProperty("--i", "0")
           }
         })
 
-        if (items.length === 0 && group.getAttribute("data-assemble") !== "off") {
-          group.classList.add("assemble-item")
-          group.style.setProperty("--i", "0")
+        if (groups.length === 0) {
+          const children = Array.from(section.children) as HTMLElement[]
+          children.forEach((child, i) => {
+            if (child.getAttribute("data-assemble") !== "off") {
+              child.classList.add("assemble-item")
+              child.style.setProperty("--i", String(i))
+            }
+          })
         }
-      })
-
-      if (groups.length === 0) {
-        const children = Array.from(section.children) as HTMLElement[]
-        children.forEach((child, i) => {
-          if (child.getAttribute("data-assemble") !== "off") {
-            child.classList.add("assemble-item")
-            child.style.setProperty("--i", String(i))
-          }
-        })
       }
 
+      // 2. Observer setup (must run on every mount cycle)
       const io = new IntersectionObserver(
         (entries) => {
           for (const entry of entries) {
-            if (entry.isIntersecting && entry.intersectionRatio > 0.15) {
+            // Using intersectionRatio > 0 or isIntersecting guarantees it fires even for huge sections.
+            if (entry.isIntersecting) {
               section.classList.add("assembled")
               const items = Array.from(section.querySelectorAll<HTMLElement>(".assemble-item"))
 
@@ -115,8 +101,8 @@ export default function AssembleOnScroll() {
         },
         {
           root: null,
-          rootMargin: "0px 0px -15% 0px",
-          threshold: [0, 0.1, 0.25, 0.4],
+          rootMargin: "0px 0px -5% 0px", // Reduced margin to ensure earlier trigger
+          threshold: 0, // 0 guarantees it fires as soon as any part intersects
         },
       )
 

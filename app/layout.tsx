@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Inter, JetBrains_Mono } from "next/font/google"
+import { GoogleAnalytics } from "@next/third-parties/google"
 import HomeFab from "@/components/home-fab"
 import "./globals.css"
 
@@ -95,7 +96,6 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
   },
   manifest: "/site.webmanifest",
-    generator: 'v0.app'
 }
 
 export default function RootLayout({
@@ -168,6 +168,8 @@ export default function RootLayout({
       <body>
         {children}
         <HomeFab />
+        {/* Next.js公式パッケージによる安全なGA4導入 */}
+        <GoogleAnalytics gaId="G-Q52JJSZ84B" />
       </body>
     </html>
   )
