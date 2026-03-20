@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react"
-import DynamicImage from "@/components/dynamic-image"
+import Image from "next/image"
 import { ChevronLeft, ChevronRight, MapPin, Phone } from "lucide-react"
 import { defaultSlides, type Slide } from "@/lib/content"
 
@@ -41,12 +41,14 @@ export default function HeroSection() {
             key={`${s.title}-${i}`}
             className={`absolute inset-0 transition-opacity duration-1000 ${i === current ? "opacity-100" : "opacity-0"}`}
           >
-            <DynamicImage
+            {/* Vercelの最適化エンジンを100%活用するNext.js公式Imageコンポーネントに刷新 */}
+            <Image
               src={s.image || "/placeholder.svg?height=900&width=1600&query=hotel hero background"}
               alt={s.title}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
               priority={i === 0}
+              quality={i === 0 ? 85 : 75}
               className="object-cover object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/50" />
@@ -75,13 +77,15 @@ export default function HeroSection() {
       <div className="absolute inset-0 z-10 flex items-center justify-center parallax-layer-2">
         <div className="max-w-4xl px-4 sm:px-6 lg:px-8 text-center text-white">
           <div className="mb-4 sm:mb-6">
-            {/* Title */}
-            <h1 className="mb-2 text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-wider drop-shadow-2xl [text-shadow:_3px_3px_12px_rgb(0_0_0_/_90%)]">
-              <span className="text-[#7FB3FF]">ホテルシロー</span>
+            {/* SEO最強化: 見た目は一切変えずに「船橋」「ビジネスホテル」を最重要のh1タグに格納 */}
+            <h1 className="flex flex-col justify-center">
+              <span className="mb-2 text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-wider drop-shadow-2xl [text-shadow:_3px_3px_12px_rgb(0_0_0_/_90%)] text-[#7FB3FF]">
+                ホテルシロー
+              </span>
+              <span className="text-sm sm:text-base lg:text-lg text-blue-100 tracking-wide drop-shadow-lg [text-shadow:_2px_2px_6px_rgb(0_0_0_/_80%)] font-normal">
+                船橋の心温まるビジネスホテル ✨
+              </span>
             </h1>
-            <p className="text-sm sm:text-base lg:text-lg text-blue-100 tracking-wide drop-shadow-lg [text-shadow:_2px_2px_6px_rgb(0_0_0_/_80%)]">
-              船橋の心温まるビジネスホテル ✨
-            </p>
           </div>
 
           <div className="mb-8 sm:mb-10 flex min-h-[160px] sm:min-h-[180px] flex-col justify-center space-y-3 sm:space-y-4 bg-black/25 backdrop-blur-md rounded-3xl p-5 sm:p-7 border border-white/10 shadow-2xl">
