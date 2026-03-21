@@ -21,7 +21,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "(公式)ホテルシローWebサイト | 千葉県船橋市のビジネスホテル",
   description:
-    "千葉県船橋市にあるビジネスホテルシロー。JR船橋駅南口から徒歩7分。東京ディズニーリゾートへのアクセス良好。快適な客室と充実したアメニティでビジネス・観光の拠点に最適です。無料駐車場完備。",
+    "千葉県船橋市にあるビジネスホテルシロー。JR船橋駅南口から徒歩7分。東京ディズニーリゾートへのアクセス良好。",
   keywords:
     "ホテルシロー,船橋,ビジネスホテル,東京ディズニーリゾート,千葉,宿泊,予約,JR船橋駅,駐車場無料,24時間受付,観光,出張,アクセス良好,船橋市本町",
   authors: [{ name: "Hotel Shiro", url: "https://hotel-shiro-official.com" }],
@@ -75,7 +75,8 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "Mgm012nme7S21M0fWAqnWjsVTZrZ4rpvD6KaIfrUXCs",
+    // 正式ドメイン(hotel-shiro-official.com)用の最新コードを反映
+    google: "5YKCv39_on_4oWkC-D7gCfT9XNVxEvTuPvM3eifaaGQ",
     yandex: "your-yandex-verification-code",
     yahoo: "your-yahoo-verification-code",
   },
@@ -168,7 +169,6 @@ export default function RootLayout({
       <body>
         {children}
         <HomeFab />
-        {/* Next.js公式パッケージによる安全なGA4導入 */}
         <GoogleAnalytics gaId="G-Q52JJSZ84B" />
       </body>
     </html>
